@@ -3,7 +3,10 @@ const app = {
   count: 0,
   async getUsersByName(username) {
     this.count++;
-    return await fetch(`https://api.github.com/search/users?q=${username}`);
+    const result = await fetch(
+      `https://api.github.com/search/users?q=${username}`,
+    );
+    return result;
   },
 };
 document.getElementById("getrepos").addEventListener("click", async (e) => {
@@ -36,7 +39,7 @@ document.getElementById("getrepos").addEventListener("click", async (e) => {
 
   const username = id("name").value;
 
-  const resp = app.getUsersByName(username);
+  const resp = await app.getUsersByName(username);
   // const repos = fetch(
   //   `https://api.github.com/users/joshi0507/repos?sort=updated`,
   // );
