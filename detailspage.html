@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div id="data"></div>
+  </body>
+  <script>
+    (async function () {
+      const id = (id) => document.getElementById(id);
+      const url = new URLSearchParams(window.location.search);
+      const user = window.atob(url.get("login"));
+      console.log(user);
+      const mainDiv = id("data");
+      const data = await fetch(
+        `https://api.github.com/users/${user}/repos?sort=updated`,
+      );
+      const commitHabit = await fetch(
+        `https://api.github.com/users/${user}/events/public`,
+      );
+      console.log(await commitHabit.json());
+      console.log(await data.json());
+    })();
+  </script>
+</html>
